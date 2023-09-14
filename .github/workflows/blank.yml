@@ -1,0 +1,19 @@
+name: Discord Notification
+
+on:
+  push:
+    branches:
+      - main  # Replace 'main' with your repository's default branch
+
+jobs:
+  send_discord_message:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Send Discord Message
+        env:
+          WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        run: |
+          curl -X POST -H "Content-Type: application/json" -d '{
+            "content": "Hello from GitHub Actions!"
+          }' $WEBHOOK_URL
